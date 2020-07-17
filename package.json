@@ -1,0 +1,14 @@
+{
+  "name": "sumup",
+  "version": "1.0.0",
+  "description": "SumUp qa",
+  "main": "test.js",
+  "private": true,
+  "dependencies": {
+    "puppeteer": "2.0.0",
+    "jest": ">=20 <=24"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
