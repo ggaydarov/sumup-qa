@@ -21,23 +21,22 @@ exports.createPage = async function(browser) {
 };
 
 exports.closeModal = async function(page) {
-    await page.waitForSelector(selectors.MODAL_BUTTON, { visible: true, timeout: 0 });
+    await page.waitForSelector(selectors.MODAL_BUTTON);
     await page.click(selectors.MODAL_BUTTON);
-    await page.waitForSelector(selectors.MODAL_BUTTON, { visible: false, timeout: 0 });
     await console.log("Close geo modal");
 };
 
 exports.clickHamburgerMenu = async function(page) {
-    await page.waitForSelector(selectors.HAMBURGER_BUTTON, { visible: true, timeout: 0 });
-    await page.waitForSelector(selectors.GET_STARTED, { visible: false, timeout: 0 });
+    await page.waitForSelector(selectors.HAMBURGER_BUTTON);
+    await page.waitForSelector(selectors.GET_STARTED, { visible: false});
     await page.click(selectors.HAMBURGER_BUTTON);
     await console.log("Open hamburger menu");
 };
 
 exports.clickLogin = async function(page) {
-    await page.waitForSelector(selectors.LOGIN_BUTTON, { visible: true, timeout: 0 });
+    await page.waitForSelector(selectors.LOGIN_BUTTON);
     await page.click(selectors.LOGIN_BUTTON_SVG);
-    await page.waitForSelector(selectors.LOGIN_SUBMIT, { visible: true, timeout: 0 });
+    await page.waitForSelector(selectors.LOGIN_SUBMIT);
     await console.log("Clicks login link");
 };
 
@@ -47,29 +46,31 @@ exports.loginWithUser = async function(page) {
     await login(page);
     const loginResponse = await page.waitForResponse(response => response.url().includes('oauth'));
     expect(await loginResponse.status()).toBe(200);
-    await page.waitForSelector(selectors.BUSINESS_DETAILS_SUBMIT, { visible: true, timeout: 0 });
-    await page.waitForSelector(selectors.BUSINESS_DETAILS_ACCOUNT, { visible: true, timeout: 0 });
-    await page.waitForSelector(selectors.BUSINESS_DETAILS_COUNTRY, { visible: true, timeout: 0 });
+    await page.waitForSelector(selectors.BUSINESS_DETAILS_SUBMIT);
+    await page.waitForSelector(selectors.BUSINESS_DETAILS_ACCOUNT);
+    await page.waitForSelector(selectors.BUSINESS_DETAILS_COUNTRY);
 };
 
 exports.clickAccountHamburgerMenu = async function(page) {
-    await page.waitForSelector(selectors.ACCOUNT_HAMBURGER_MENU, { visible: true, timeout: 0 });
+    await page.waitForSelector(selectors.ACCOUNT_HAMBURGER_MENU);
     await page.click(selectors.ACCOUNT_HAMBURGER_MENU);
-    await page.waitForSelector("[data-testid='sidebar-backdrop']", { visible: true, timeout: 0 });
-    await page.waitForSelector(selectors.ACCOUNT_HAMBURGER_MENU, { visible: false, timeout: 0 });
+    await page.waitForSelector("[data-testid='sidebar-backdrop']");
+    await page.waitForSelector(selectors.ACCOUNT_HAMBURGER_MENU);
     await page.waitForFunction('document.querySelector("[data-testid=\'sidebar-backdrop\']").classList[0].includes("visible")');
-    await page.waitForSelector(selectors.BUSINESS_DETAILS_SUBMIT, { visible: false, timeout: 0 });
-    await page.waitForSelector(selectors.BUSINESS_DETAILS_ACCOUNT, { visible: false, timeout: 0 });
-    await page.waitForSelector(selectors.BUSINESS_DETAILS_COUNTRY, { visible: false, timeout: 0 });
+    await page.waitForSelector(selectors.BUSINESS_DETAILS_SUBMIT);
+    await page.waitForSelector(selectors.BUSINESS_DETAILS_ACCOUNT);
+    await page.waitForSelector(selectors.BUSINESS_DETAILS_COUNTRY);
+    await page.waitForSelector("[data-testid='sidebar-close-button']");
     await console.log("Clicks account hamburger menu");
 };
 
 exports.clickPayouts = async function(page) {
-    await page.waitForSelector("nav[class*='SideNav']", { visible: true, timeout: 2000 });
-    await page.waitForSelector("[class*='PageHeaderContainer']", { visible: true, timeout: 2000 });
-    await page.waitForSelector("[class*='selected-sub-nav']", { visible: true, timeout: 2000 });
+    await page.waitForSelector("nav[class*='SideNav']");
+    await page.waitForSelector("[class*='PageHeaderContainer']");
+    await page.waitForSelector("[class*='selected-sub-nav']");
+    await page.waitForSelector("[data-selector='SIDENAV.NAV_ITEMS.SHOP']");
     try {
-        await page.waitForSelector(selectors.PAYOUTS_LINK, { visible: true, timeout: 5000 });
+        await page.waitForSelector(selectors.PAYOUTS_LINK);
     }
     catch {
         await console.log("Hamburger animation is not loaded yet");
@@ -79,25 +80,25 @@ exports.clickPayouts = async function(page) {
 };
 
 exports.getPayoutsText = async function(page) {
-    await page.waitForSelector(selectors.PAYOUTS_EMPTY_PAGE_TEXT, { visible: true, timeout: 0 });
+    await page.waitForSelector(selectors.PAYOUTS_EMPTY_PAGE_TEXT);
     let element = await page.$(selectors.PAYOUTS_EMPTY_PAGE_TEXT);
     return page.evaluate(el => el.textContent, element);
 };
 
 typeUser = async function(page) {
-    await page.waitForSelector(selectors.USERNAME, { visible: true, timeout: 0 });
+    await page.waitForSelector(selectors.USERNAME);
     await page.type(selectors.USERNAME, users.user);
     await console.log("Enters username");
 };
 
 typePass = async function(page) {
-    await page.waitForSelector(selectors.PASSWORD, { visible: true, timeout: 0 });
+    await page.waitForSelector(selectors.PASSWORD);
     await page.type(selectors.PASSWORD, users.password);
     await console.log("Enters password");
 };
 
 login = async function(page) {
-    await page.waitForSelector(selectors.LOGIN_SUBMIT, { visible: true, timeout: 0 });
+    await page.waitForSelector(selectors.LOGIN_SUBMIT);
     await page.click(selectors.LOGIN_SUBMIT);
     await console.log("Clicks login button");
 };
