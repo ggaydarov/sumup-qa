@@ -36,7 +36,7 @@ To stop headless mode:
 Puppeteer uses chrome driver and the tests will be executed only on Chrome.
 
 #Task 2
-https://github.com/ggaydarov/sumup-qa/sumup-login-api.pdf
+https://github.com/ggaydarov/sumup-qa/blob/master/sumup-login-api.pdf
 
 #Task 3
-https://github.com/ggaydarov/sumup-qa/task3.sql
+https://github.com/ggaydarov/sumup-qa/blob/master/task3.sql
