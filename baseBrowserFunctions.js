@@ -34,9 +34,10 @@ exports.clickHamburgerMenu = async function(page) {
 };
 
 exports.clickLogin = async function(page) {
-    await page.waitForSelector(selectors.LOGIN_BUTTON);
-    await page.click(selectors.LOGIN_BUTTON_SVG);
-    await page.waitForSelector(selectors.LOGIN_SUBMIT);
+    await page.waitFor(1000);
+    await page.waitFor(selectors.LOGIN_BUTTON_SVG);
+    await page.click(selectors.LOGIN_BUTTON);
+    await page.waitFor(selectors.LOGIN_SUBMIT);
     await console.log("Clicks login link");
 };
 
@@ -70,7 +71,9 @@ exports.clickPayouts = async function(page) {
     await page.waitForSelector("[class*='selected-sub-nav']");
     await page.waitForSelector("[data-selector='SIDENAV.NAV_ITEMS.SHOP']");
     try {
-        await page.waitForSelector(selectors.PAYOUTS_LINK);
+        await page.waitFor(1000);
+        await page.waitFor(selectors.PAYOUTS_LINK);
+        await page.waitFor(selectors.PAYOUTS_LINK_SVG);
     }
     catch {
         await console.log("Hamburger animation is not loaded yet");
