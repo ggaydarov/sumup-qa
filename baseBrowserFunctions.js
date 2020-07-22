@@ -35,7 +35,7 @@ exports.clickHamburgerMenu = async function(page) {
 
 exports.clickLogin = async function(page) {
     await page.waitFor(1000);
-    await page.waitFor(selectors.LOGIN_BUTTON_SVG);
+    await page.waitFor(selectors.LOGIN_BUTTON, {timeout: 60000});
     await page.click(selectors.LOGIN_BUTTON);
     await page.waitFor(selectors.LOGIN_SUBMIT);
     await console.log("Clicks login link");
@@ -70,14 +70,9 @@ exports.clickPayouts = async function(page) {
     await page.waitForSelector("[class*='PageHeaderContainer']");
     await page.waitForSelector("[class*='selected-sub-nav']");
     await page.waitForSelector("[data-selector='SIDENAV.NAV_ITEMS.SHOP']");
-    try {
-        await page.waitFor(1000);
-        await page.waitFor(selectors.PAYOUTS_LINK);
-        await page.waitFor(selectors.PAYOUTS_LINK_SVG);
-    }
-    catch {
-        await console.log("Hamburger animation is not loaded yet");
-    }
+    await page.waitFor(1000);
+    await page.waitFor(selectors.PAYOUTS_LINK);
+    await page.waitFor(selectors.PAYOUTS_LINK_SVG);
     await page.click(selectors.PAYOUTS_LINK_SVG);
     await console.log("Clicks payouts link");
 };
